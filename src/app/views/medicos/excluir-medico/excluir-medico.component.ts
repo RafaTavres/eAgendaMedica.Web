@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { switchMap,map, Observable } from 'rxjs';
+import { NotificationService } from 'src/app/core/notification/services/notification.service';
+import { FormMedicosWiewModel } from '../models/form-medico.view-model';
 import { VisualizarMedicosWiewModel } from '../models/visualizacao-completa-medico.view-model';
 import { MedicoService } from '../services/medicos.service';
 
@@ -10,19 +13,44 @@ import { MedicoService } from '../services/medicos.service';
   styleUrls: ['./excluir-medico.component.scss']
 })
 export class ExcluirMedicoComponent implements OnInit{
-  medicoVM!: VisualizarMedicosWiewModel;
-  idSelecionado:string | null = null;
 
 
-  constructor(private toastrService:ToastrService,private route:ActivatedRoute,private medicoService: MedicoService,private router:Router){
+  medico$!: Observable<VisualizarMedicosWiewModel>;
+  
+  constructor(private route:ActivatedRoute,private medicoService: MedicoService,private router:Router,
+    private notificationService: NotificationService){
 
   }
 
   ngOnInit(): void {
-  
-  this.idSelecionado = this.route.snapshot.paramMap.get('id');
+    this.medico$ = this.route.data.pipe(map(dado => dado['medico'])); 
+    
+    }
+    
+    escrevredisgraca(w: any){
 
-  this.medicoVM = this.route.snapshot.data['medico']; 
+    }
+    excluir(){
+      this.route.paramMap
+        .pipe
+        (
+          map(params => params.get('id')!),
+          switchMap(id => this.medicoService.excluir(id))
+        ).subscribe
+        ({
+          next: res => this.processarSucesso(),
+          error: err => this.processarErro(err)
+        });
 
+
+     }
+
+   processarErro(err: Error): void {
+    this.notificationService.erro(`Erro: ${err.message}`);
+  }
+
+  processarSucesso(){
+    this.notificationService.sucesso(`Medico excluido com sucesso!`);
+    this.router.navigate(['/medicos', 'listar']);
   }
 }

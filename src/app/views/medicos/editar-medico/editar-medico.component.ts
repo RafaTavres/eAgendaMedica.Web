@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { NotificationService } from 'src/app/core/notification/services/notification.service';
 import { FormMedicosWiewModel } from '../models/form-medico.view-model';
 import { MedicoService } from '../services/medicos.service';
 
@@ -15,7 +15,7 @@ export class EditarMedicoComponent implements OnInit{
   idSelecionado:string | null = null;
   medicoBuscado:any;
 
-  constructor(private toastrService:ToastrService,private route:ActivatedRoute,private formBuilder: FormBuilder,private medicoService: MedicoService,private router:Router) {
+  constructor(private notificationService: NotificationService,private route:ActivatedRoute,private formBuilder: FormBuilder,private medicoService: MedicoService,private router:Router) {
   }
 
   ngOnInit(): void {
@@ -42,20 +42,13 @@ export class EditarMedicoComponent implements OnInit{
    }
 
    
-    processarErro(error: Error): void {
-        this.toastrService.error(
-        `Falha ao editar medico: ${error.message}`,
-        'Erro'
-      ); 
+    processarErro(err: Error): void {
+      this.notificationService.erro(`Erro: ${err}`);
 
     }
 
     processarSucesso(res: FormMedicosWiewModel){
-      this.toastrService.success(
-        `Medico ${res.nome} editado com sucesso`,
-        'Sucesso'
-      ); 
-
-      this.router.navigate(['/medicos/listar'])
+      this.notificationService.sucesso(`Medico ${res.nome} editado com sucesso!`);
+      this.router.navigate(['/medicos', 'listar']);
     }
 }

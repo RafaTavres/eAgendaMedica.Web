@@ -1,6 +1,7 @@
 import { inject, NgModule } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angular/router';
 import { EditarMedicoComponent } from './editar-medico/editar-medico.component';
+import { ExcluirMedicoComponent } from './excluir-medico/excluir-medico.component';
 import { InserirMedicoComponent } from './inserir-medico/inserir-medico.component';
 import { ListarMedicosComponent } from './listar-medicos/listar-medicos.component';
 import { FormMedicosWiewModel } from './models/form-medico.view-model';
@@ -40,8 +41,8 @@ const routes: Routes = [
   }
   ,
   {
-    path:'editar/:id',
-    component:EditarMedicoComponent,
+    path:'excluir/:id',
+    component:ExcluirMedicoComponent,
     resolve:{ medico: formsCompromissoResolver},
   }
 

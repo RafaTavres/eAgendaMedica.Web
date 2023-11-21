@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormMedicosWiewModel } from '../models/form-medico.view-model';
 import { MedicoService } from '../services/medicos.service';
-import { ToastrService } from 'ngx-toastr';
+import { NotificationService } from 'src/app/core/notification/services/notification.service';
 
 @Component({
   selector: 'app-inserir-medico',
@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class InserirMedicoComponent {
 
-    constructor(private toastrService:ToastrService,private medicoService: MedicoService,private router:Router) {
+    constructor(private notificationService: NotificationService,private medicoService: MedicoService,private router:Router) {
     }
 
     gravar(compromissoVM: FormMedicosWiewModel){
@@ -21,20 +21,13 @@ export class InserirMedicoComponent {
         })
       }
 
-      processarErro(error: Error): void {
-        this.toastrService.error(
-          
-        `Falha ao adicionar medico: ${error.message}`,
-        'Erro'
-      ); 
+      processarErro(err: Error): void {
+        this.notificationService.erro(`Erro: ${err}`);
+  
       }
-
+  
       processarSucesso(res: FormMedicosWiewModel){
-      this.toastrService.success(
-        `Medico ${res.nome} adicionado com sucesso`,
-        'Sucess'
-      ); 
-
-        this.router.navigate(['/medicos/listar'])
+        this.notificationService.sucesso(`Medico ${res.nome} adicionado com sucesso!`);
+        this.router.navigate(['/medicos', 'listar']);
       }
 }
