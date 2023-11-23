@@ -9,7 +9,7 @@ import { ListarMedicosWiewModel } from './models/listar-medico.view-model';
 import { VisualizarMedicosWiewModel } from './models/visualizacao-completa-medico.view-model';
 import { MedicoService } from './services/medicos.service';
 
-const formsCompromissoResolver: ResolveFn<FormMedicosWiewModel> =  
+const formsMedicoResolver: ResolveFn<FormMedicosWiewModel> =  
   (route: ActivatedRouteSnapshot) => 
   {
     return inject(MedicoService).selecionarPorId(route.paramMap.get('id')!)
@@ -37,13 +37,13 @@ const routes: Routes = [
   {
     path:'editar/:id',
     component:EditarMedicoComponent,
-    resolve:{ medico: formsCompromissoResolver},
+    resolve:{ medico: formsMedicoResolver},
   }
   ,
   {
     path:'excluir/:id',
     component:ExcluirMedicoComponent,
-    resolve:{ medico: formsCompromissoResolver},
+    resolve:{ medico: formsMedicoResolver},
   }
 
 ];

@@ -14,8 +14,8 @@ export class InserirMedicoComponent {
     constructor(private notificationService: NotificationService,private medicoService: MedicoService,private router:Router) {
     }
 
-    gravar(compromissoVM: FormMedicosWiewModel){
-        this.medicoService.inserir(compromissoVM).subscribe({
+    gravar(medicoVM: FormMedicosWiewModel){
+        this.medicoService.inserir(medicoVM).subscribe({
           next:(res: FormMedicosWiewModel) => this.processarSucesso(res),
           error: (error: Error) => this.processarErro(error)
         })

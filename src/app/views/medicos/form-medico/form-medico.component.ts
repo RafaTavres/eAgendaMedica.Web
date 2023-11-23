@@ -12,7 +12,7 @@ import { MedicoService } from '../services/medicos.service';
 export class FormMedicoComponent implements OnInit {
 
   form!: FormGroup;
-  compromissoVM!: FormMedicosWiewModel;
+  medicoVM!: FormMedicosWiewModel;
 
   @Input() medicoBuscado: any;
   @Output() onGravar!: EventEmitter<FormMedicosWiewModel | null>;
@@ -53,9 +53,9 @@ export class FormMedicoComponent implements OnInit {
      }
 
 
-    this.compromissoVM = this.form.value;
+    this.medicoVM = this.form.value;
 
-    this.onGravar.emit(this.compromissoVM);
+    this.onGravar.emit(this.medicoVM);
   }
 
 }
