@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { map, Observable } from 'rxjs';
+import { map, tap,Observable } from 'rxjs';
 import { ListarMedicosWiewModel } from '../../medicos/models/listar-medico.view-model';
 import { FormAtividadesWiewModel } from '../models/form-atividade.view-model';
 import { AtividadeService } from '../services/atividade.service';
@@ -43,7 +43,7 @@ export class FormAtividadesComponent implements OnInit {
       dataRealizacao: new FormControl(new Date().toISOString().slice(0,10),[Validators.required]),
       horaInicio: new FormControl(null,[Validators.required]),
       horaTermino: new FormControl(null,[Validators.required]),
-      tipoAtividade: new FormControl(0,[Validators.required]),
+      tipoAtividadeEnum: new FormControl(0,[Validators.required]),
       idsMedicos : this.idsMedicos
       });
       
@@ -53,20 +53,20 @@ export class FormAtividadesComponent implements OnInit {
           assunto : this.atividadeBuscado.assunto,
           dataRealizacao:this.atividadeBuscado.dataRealizacao.slice(0,10),
           horaInicio:this.atividadeBuscado.horaInicio.slice(0,5),
-          horaTermino:this.atividadeBuscado.horaTermino.slice(0,5),
+          horaTermino:this.atividadeBuscado.horaTermino.slice(0,5),       
+          tipoAtividadeEnum:this.atividadeBuscado.tipoAtividadeEnum,
           idsMedicos:this.idsBuscados,     
-          tipoAtividadeEnum:this.atividadeBuscado.tipoAtividade,
         }
       );
 
-      console.log(this.form.value);
   }
 
   private obterIdsDosMedicos() {
-    if (this.atividadeBuscado.medicos != null)
+    if (this.atividadeBuscado != null){
       for (let medico of this.atividadeBuscado.medicos) {
         this.idsBuscados.push(medico.id);
       }
+    }
   }
 
   campoInvalido(nome: string){
@@ -87,18 +87,16 @@ export class FormAtividadesComponent implements OnInit {
 
 
     this.atividadeVM = this.form.value;
-    console.log(this.atividadeVM);
     this.onGravar.emit(this.atividadeVM);
   }
 
   mudarParaConsulta(){
+    this.idsMedicos.value!.splice(1,Number.MAX_VALUE);
     this.Ehcirurgia = false;
-    console.log(this.Ehcirurgia);
   }
 
   mudarParaCirurgia(){
     this.Ehcirurgia = true;
-    console.log(this.Ehcirurgia);
   }
 
   isOptionDisabled(opt: any): boolean {

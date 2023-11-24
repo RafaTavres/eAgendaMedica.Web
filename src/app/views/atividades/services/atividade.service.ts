@@ -28,10 +28,20 @@ export class AtividadeService{
        }
 
       public editar(id:string, atividade: FormAtividadesWiewModel): Observable<FormAtividadesWiewModel>{
+        console.clear();
+        console.log(atividade);
         return this.http.put<any>(this.API_URL + "/"+id, atividade)
         .pipe(map((res) => res.dados),
+              tap((res) =>{console.log(res)}),
         catchError((err: HttpErrorResponse) =>this.processarErroHttp(err)))
         }
+
+      public excluir(id:string){
+          return this.http.delete<any>(this.API_URL + '/'+id)
+          .pipe(map(res => res),
+           catchError((err: HttpErrorResponse) =>this.processarErroHttp(err)))
+         
+      }
 
       public selecionarPorId(id: string){
           return this.http.get<any>(this.API_URL + "/visualizacao-completa/"+id )

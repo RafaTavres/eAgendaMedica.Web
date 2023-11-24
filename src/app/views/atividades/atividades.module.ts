@@ -20,7 +20,8 @@ import localePt from '@angular/common/locales/pt';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
-import { EditarAtividadesComponent } from './editar-atividades/editar-atividades.component';  
+import { EditarAtividadesComponent } from './editar-atividades/editar-atividades.component';
+import { ExcluirAtividadesComponent } from './excluir-atividades/excluir-atividades.component';  
 
 registerLocaleData(localePt);
 
@@ -29,7 +30,8 @@ registerLocaleData(localePt);
     ListarAtividadesComponent,
     InserirAtividadesComponent,
     FormAtividadesComponent,
-    EditarAtividadesComponent
+    EditarAtividadesComponent,
+    ExcluirAtividadesComponent
   ],
   imports: [
     AtividadesRoutingModule,

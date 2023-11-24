@@ -4,6 +4,7 @@ import { InserirMedicoComponent } from '../medicos/inserir-medico/inserir-medico
 import { ListarMedicosWiewModel } from '../medicos/models/listar-medico.view-model';
 import { MedicoService } from '../medicos/services/medicos.service';
 import { EditarAtividadesComponent } from './editar-atividades/editar-atividades.component';
+import { ExcluirAtividadesComponent } from './excluir-atividades/excluir-atividades.component';
 import { FormAtividadesComponent } from './form-atividades/form-atividades.component';
 import { InserirAtividadesComponent } from './inserir-atividades/inserir-atividades.component';
 import { ListarAtividadesComponent } from './listar-atividades/listar-atividades.component';
@@ -44,6 +45,13 @@ const routes: Routes = [
   {
     path:'editar/:id',
     component:EditarAtividadesComponent,
+    resolve:{ atividade: formsAtividadeResolver,
+              medicos: listarMedicosResolver
+            },
+  },  
+  {
+    path:'excluir/:id',
+    component:ExcluirAtividadesComponent,
     resolve:{ atividade: formsAtividadeResolver},
   }
 ];

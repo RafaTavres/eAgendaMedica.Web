@@ -8,6 +8,6 @@ export type VisualizarAtividadeViewModel = {
     horaInicio:Time;
     horaTermino:Time;
     tempoDeDescanso:Time;
-    tipoAtividade:number;
+    tipoAtividadeEnum:number;
     medicos:ListarMedicosWiewModel[];
 };

@@ -5,6 +5,6 @@ export type FormAtividadesWiewModel = {
     dataRealizacao:Date;
     horaInicio:Time;
     horaTermino:Time;
-    tipoAtividade:number;
+    tipoAtividadeEnum:number;
     idsMedicos:string[];
 };

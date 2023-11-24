@@ -27,9 +27,6 @@ export class ExcluirMedicoComponent implements OnInit{
     
     }
     
-    escrevredisgraca(w: any){
-
-    }
     excluir(){
       this.route.paramMap
         .pipe
