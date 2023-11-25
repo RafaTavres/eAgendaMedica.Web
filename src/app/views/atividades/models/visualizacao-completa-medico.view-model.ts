@@ -7,7 +7,7 @@ export type VisualizarAtividadeViewModel = {
     dataRealizacao:Date;
     horaInicio:Time;
     horaTermino:Time;
-    tempoDeDescanso:Time;
     tipoAtividadeEnum:number;
+    finalizada:boolean;
     medicos:ListarMedicosWiewModel[];
 };

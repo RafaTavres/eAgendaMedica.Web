@@ -5,5 +5,6 @@ export type ListarMedicosWiewModel = {
     crm:string;
     nome:string;
     emAtividade:boolean;
+    horasDeDescanso:string;
     horasOcupadas:HorasOcupadasViewModel[];
 };

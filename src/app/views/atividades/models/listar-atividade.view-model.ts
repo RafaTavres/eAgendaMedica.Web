@@ -5,7 +5,7 @@ export type ListarAtividadesWiewModel = {
     dataRealizacao: Date;
     horaInicio: string;
     horaTermino: string;
-    tempoDeDescanso: string;
+    finalizada:boolean;
     tipoAtividadeEnum: number;
 };
 

@@ -14,7 +14,7 @@
   
 
       <div class="row gap-3">
-        <mat-card *ngFor="let atividade of atividades$ | async" appCardHover class="col-12 col-md-9 col-lg-5 col-xxl-3">
+        <mat-card [ngClass]="{'border border-secondary' : atividade.finalizada}" *ngFor="let atividade of atividades$ | async" appCardHover class="col-12 col-md-9 col-lg-5 col-xxl-3">
           <mat-card-header>
             <mat-card-title>
               <span>{{atividade.assunto}}</span>
@@ -37,6 +37,11 @@
           
           <mat-card-content class="mt-3 fs-6">
             <span>Tipo: {{atividade.tipoAtividadeEnum == 1? "Consulta" : "Cirurgia"}}</span>
+            <mat-divider></mat-divider>
+          </mat-card-content>
+
+          <mat-card-content *ngIf="atividade.finalizada == true" class="mt-3 fs-6">
+            <span class="text-secondary">Finalizada</span>
             <mat-divider></mat-divider>
           </mat-card-content>
   
