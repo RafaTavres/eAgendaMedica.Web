@@ -2,8 +2,8 @@
 
 @include mat-core();
 
-$candy-app-primary: mat-palette($mat-indigo,  A200, A100, A400);
-$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$candy-app-primary: mat-palette($mat-indigo,  A100, A100, A100);
+$candy-app-accent:  mat-palette($mat-pink, A400, A400, A400);
 $candy-app-warn:    mat-palette($mat-red);
 
 $candy-app-theme: mat-light-theme((

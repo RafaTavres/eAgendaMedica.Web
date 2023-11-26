@@ -48,7 +48,17 @@ export class MedicoService{
     }
 
 
-  
+    selecionarTop10(dataInicio:Date,dataLimite:Date): Observable<ListarMedicosWiewModel[]> {
+
+      const dataHoje = dataInicio.toISOString().substring(0, 10);
+      const dataFim = dataLimite.toISOString().substring(0, 10);
+
+      return this.http.get<any>(this.API_URL+ `/selecionar-top-10-medicos?${dataHoje}=${dataFim}`).pipe(
+        map((res) => res.dados),
+        catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
+      );
+    }
+
   private processarErroHttp(erro: HttpErrorResponse) {
     let mensagemErro = '';
 
